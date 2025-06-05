@@ -1,0 +1,135 @@
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>${user.home}/.m2/repository</localRepository>
+  <mirrors>
+        <mirror>
+            <id>my-repository-http-unblocker</id>
+            <mirrorOf>fb</mirrorOf>
+            <name>Mirror of fb</name>
+            <url>https://repository.fleetboard.dmz/content/groups/public/</url>
+        </mirror>
+    </mirrors>
+  <servers>
+    <server>
+      <id>deltapack-p2-repository</id>
+      <username>rpolley</username>
+      <password>{SeLgaKNikxAHVf9SPAzPopKZxvD4Ac+7HYwoq5Td57w=}</password>
+      </server>
+    <server>
+      <id>FbSoap</id>
+      <username>daimler</username>
+      <password>{axn1Y5TUNOcHLQ91anBD+kBTytDemKWh4hrS0lP5ZIUYBnptNCCSArEz4ooL5dg6oN8ST41T8FQ5IrGivRHiA7A6T1GAznb9wBicGtZN2yQ=}</password>
+      </server>
+    <server>
+      <username>rpolley@tbdir.net</username>
+      <password>{iz0qIYgeRvwHOfCPnb5JvZ9+3XZRGyxhTBXaC42qHdV1XkiBfGC5sUzek91oorifHb7w/IWue8SnmN4QQd57X0+KqZCJGkYrevxCf1NTILIPkypNQdG1C5gjCjGUbTV6}</password>
+      <id>art_dtfb_central</id>
+      </server>
+    <server>
+      <username>rpolley@tbdir.net</username>
+      <password>{iz0qIYgeRvwHOfCPnb5JvZ9+3XZRGyxhTBXaC42qHdV1XkiBfGC5sUzek91oorifHb7w/IWue8SnmN4QQd57X0+KqZCJGkYrevxCf1NTILIPkypNQdG1C5gjCjGUbTV6}</password>
+      <id>art_dtfb_snapshots</id>
+      </server>
+    <server>
+      <id>github</id>
+      <username>rpolley@tbdir.net</username>
+      <password>{/PHS6YyhK1oHk4TTWrC9jGGIyJxZ5UrgNnbCR1gGKZpxytblPZyR9NVqfp1ow5gHg82WmVAsl81Y/UNctnuZYg==}</password>
+      </server>
+    </servers>
+  <profiles>
+    <profile>
+      <repositories>
+        <repository>
+          <snapshots>
+            <enabled>false</enabled>
+            </snapshots>
+          <id>art_dtfb_central</id>
+          <name>dtfb-maven-virtual</name>
+          <url>https://art.t3.daimlertruck.com/artifactory/dtfb-maven-virtual</url>
+          </repository>
+        <repository>
+          <snapshots />
+          <id>art_dtfb_snapshots</id>
+          <name>dtfb-maven-virtual</name>
+          <url>https://art.t3.daimlertruck.com/artifactory/dtfb-maven-virtual</url>
+          </repository>
+        </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <snapshots>
+            <enabled>false</enabled>
+            </snapshots>
+          <id>art_dtfb_central</id>
+          <name>dtfb-maven-virtual</name>
+          <url>https://art.t3.daimlertruck.com/artifactory/dtfb-maven-virtual</url>
+          </pluginRepository>
+        <pluginRepository>
+          <snapshots />
+          <id>art_dtfb_snapshots</id>
+          <name>dtfb-maven-virtual</name>
+          <url>https://art.t3.daimlertruck.com/artifactory/dtfb-maven-virtual</url>
+          </pluginRepository>
+        </pluginRepositories>
+      <id>artifactory</id>
+      </profile>
+    <profile>
+      <id>fleetboard-default</id>
+      <repositories>
+        <repository>
+          <id>FleetBoardReleases</id>
+          <name>FleetBoard's nexus repository</name>
+          <releases>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <!-- Look for updated snapshots at all times, not only once/24h -->
+            <updatePolicy>interval:360</updatePolicy>
+            </snapshots>
+        <url>https://repository.fleetboard.dmz/content/groups/public/</url>
+          <layout>default</layout>
+          </repository>
+        </repositories>
+      <pluginRepositories>
+        <pluginRepository>
+          <!-- same repository as above for snapshots & releases -->
+          <id>FleetBoardNexus.plugins</id>
+          <name>Maven Local Nexus Maven Repository</name>
+          <url>https://repository.fleetboard.dmz/content/groups/public/</url>
+          <layout>default</layout>
+          <releases>
+            <enabled>true</enabled>
+            <checksumPolicy>warn</checksumPolicy>
+            </releases>
+          <snapshots>
+            <enabled>true</enabled>
+            <updatePolicy>always</updatePolicy>
+            <checksumPolicy>warn</checksumPolicy>
+            </snapshots>
+          </pluginRepository>
+        </pluginRepositories>
+      </profile>
+    <profile>
+      <id>sonar-parameter</id>
+      <properties>
+        <sonar.host.url>http://sonar02.fleetboard.dmz:9000/sonarqube</sonar.host.url>
+        <sonar.login>{JsrY14nkQ0IHDPuOODt73hqlqn7ySMHMkOzSDpTiddqsShTXtxkr2kIF0i9aCNdVRP67PAp8pJdPVXKZpgsj/w==}</sonar.login>
+        </properties>
+      </profile>
+    <profile>
+      <id>t3-sonar</id>
+      <properties>
+        <sonar.host.url>https://son.t3.daimlertruck.com</sonar.host.url>
+      </properties>    
+    </profile>
+
+    </profiles>
+
+
+  <activeProfiles>
+    <!-- <activeProfile>fleetboard-default</activeProfile>-->
+    <!--<activeProfile>sonar-parameter</activeProfile>-->
+    <!--<activeProfile>artifactory</activeProfile>-->
+    </activeProfiles>
+  </settings>

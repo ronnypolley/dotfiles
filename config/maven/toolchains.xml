@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF8"?>
+<toolchains>
+    <!-- JDK toolchains -->
+	<toolchain>
+		<type>jdk</type>
+		<provides>
+			<version>1.8</version>
+			<vendor>sun</vendor>
+			<id>JavaSE-1.8</id>
+		</provides>
+		<configuration>
+			<jdkHome>C:\Users\rpolley\.posh_sdk\java\8.0.292.hs-adpt-x86</jdkHome>
+			<bootClassPath>
+				<includes>
+					<include>lib/*</include>
+					<include>lib/ext/*</include>
+					<include>lib/endorsed/*</include>
+					<include>jre/lib/*</include>
+					<include>jre/lib/ext/*</include>
+					<include>jre/lib/endorsed/*</include>
+				</includes>
+			</bootClassPath>
+		</configuration>
+	</toolchain>
+</toolchains>
