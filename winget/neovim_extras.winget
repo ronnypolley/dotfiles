@@ -1,0 +1,74 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Neovim
+      settings:
+        id: Neovim.Neovim
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Neovide
+      settings:
+        id: Neovide.Neovide
+        source: winget
+      dependsOn:
+        - Neovim
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: FD (Find)
+      settings:
+        id: sharkdp.fd
+        source: winget
+      dependsOn:
+        - Neovim
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ripgrep 
+      settings:
+        id: BurntSushi.ripgrep.MSVC
+        source: winget
+      dependsOn:
+        - Neovim
+
+    - resource: Script
+      id: NeovimDataFolder
+      dependsOn:
+        - Neovim
+      settings:
+        SetScript: |
+          New-Item -Path $env:LOCALAPPDATA\nvim -Type Directory
+        TestScript: |
+          Test-Path $env:LOCALAPPDATA\nvim
+        GetScript: |
+          Get-Content $env:LOCALAPPDATA\nvim
+
+
+    - resource: Script
+      id: LazyVim
+      dependesOn:
+        - Neovim
+        - NeovimDataFolder
+        - Git
+      settings:
+        SetScript: |
+          git clone https://github.com/LazyVim/starter.git "$env:LOCALAPPDATA/nvim/"
+          Remove-Item $env:LOCALAPPDATA/nvim/.git -Recurse -Force
+        TestScript: |
+          Test-Path $env:LOCALAPPDATA\nvim\.neoconf.json
+        GetScript: |
+          Get-Path $env:LOCALAPPDATA
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Zig
+      dependesOn:
+        - Neovim
+      settings:
+        id: zig.zig
+        source: winget
+
