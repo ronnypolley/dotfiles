@@ -11,40 +11,38 @@ properties:
         id: Git.Git
         source: winget
 
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: LazyGit
+      settings:
+        id: JesseDuffield.LazyGit
+        source: winget
+      dependsOn:
+        - Git
+
     - resource: Script
       id: GitConfig
       settings:
         SetScript: | 
-          Copy-Item -Path config/git/.gitconfig -Destination $env:USERPROFILE/.gitconfig
-          if(-not (Test-Path $env:USERPROFILE/.config/git)) {
-            New-Item -Path $env:USERPROFILE/.config/git -Type Directory
+          Copy-Item -Path config/git/.gitconfig -Destination ${env:USERPROFILE}/.gitconfig
+          if(-not (Test-Path ${env:USERPROFILE}/.config/git)) {
+            New-Item -Path ${env:USERPROFILE}/.config/git -Type Directory
           }
-          Copy-Item -Path config/git/gitconfig-* -Destination $env:USERPROFILE/.config/git/
+          Copy-Item -Path config/git/gitconfig-* -Destination ${env:USERPROFILE}/.config/git/
         TestScript: |
-          ((Test-Path "$env:USERPROFILE/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)) -and
-          (Test-Path "$env:USERPROFILE/.config/git") -and 
-          ((Get-FileHash $env:USERPROFILE/.config/git/gitconfig-fb).Hash -eq (Get-FileHash config/git/.config/gitconfig-fb).Hash) -and
-          ((Get-FileHash $env:USERPROFILE/.config/git/gitconfig-own).Hash -eq (Get-FileHash config/git/.config/gitconfig-own).Hash)
+          ((Test-Path "${env:USERPROFILE}/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)) -and
+          (Test-Path "${env:USERPROFILE}/.config/git") -and 
+          ((Get-FileHash ${env:USERPROFILE}/.config/git/gitconfig-fb).Hash -eq (Get-FileHash config/git/gitconfig-fb).Hash) -and
+          ((Get-FileHash ${env:USERPROFILE}/.config/git/gitconfig-own).Hash -eq (Get-FileHash config/git/gitconfig-own).Hash)
         GetScript: |
-          Get-Content "$env:USERPROFILE/.gitconfig"
+          Get-Content "${env:USERPROFILE}/.gitconfig"
 
     - resource: Script
       id: SSHConfig
       settings:
         SetScript: | 
-          Copy-Item -Path config/ssh/config -Destination $env:USERPROFILE/.ssh/config
+          Copy-Item -Path config/ssh/config -Destination ${env:USERPROFILE}/.ssh/config
         TestScript: |
-          (Test-Path "$env:USERPROFILE/.ssh/config") -and ((Get-FileHash $env:USERPROFILE/.ssh/config).Hash -eq (Get-FileHash config/ssh/config).Hash)
+          (Test-Path "${env:USERPROFILE}/.ssh/config") -and ((Get-FileHash $env:USERPROFILE/.ssh/config).Hash -eq (Get-FileHash config/ssh/config).Hash)
         GetScript: |
-          Get-Content "$env:USERPROFILE/.ssh/config"
+          Get-Content "${env:USERPROFILE}/.ssh/config"
 
-    - resource: GitDsc/GitClone
-      dependsOn:
-        - GitConfig
-        - SSHConfig
-      directives:
-        description: Clone SoapFacade BasicService
-        allowPrerelease: true
-      settings:
-        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-basicservice.git
-        RootDirectory: "${WingetConfigRoot}/Documents/Projects/Fleetboard/Entwicklung/soapfacade/"
