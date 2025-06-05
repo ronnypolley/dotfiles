@@ -1,0 +1,375 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git
+      settings:
+        id: Git.Git
+        source: winget
+
+    - resource: Script
+      id: GitConfig
+      settings:
+        SetScript: | 
+          Copy-Item -Path config/git/.gitconfig -Destination ${env:USERPROFILE}/.gitconfig
+          if(-not (Test-Path ${env:USERPROFILE}/.config/git)) {
+            New-Item -Path ${env:USERPROFILE}/.config/git -Type Directory
+          }
+          Copy-Item -Path config/git/gitconfig-* -Destination ${env:USERPROFILE}/.config/git/
+        TestScript: |
+          ((Test-Path "${env:USERPROFILE}/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)) -and
+          (Test-Path "${env:USERPROFILE}/.config/git") -and 
+          ((Get-FileHash ${env:USERPROFILE}/.config/git/gitconfig-fb).Hash -eq (Get-FileHash config/git/gitconfig-fb).Hash) -and
+          ((Get-FileHash ${env:USERPROFILE}/.config/git/gitconfig-own).Hash -eq (Get-FileHash config/git/gitconfig-own).Hash)
+        GetScript: |
+          Get-Content "${env:USERPROFILE}/.gitconfig"
+
+    - resource: Script
+      id: SSHConfig
+      settings:
+        SetScript: | 
+          Copy-Item -Path config/ssh/config -Destination ${env:USERPROFILE}/.ssh/config
+        TestScript: |
+          (Test-Path "${env:USERPROFILE}/.ssh/config") -and ((Get-FileHash $env:USERPROFILE/.ssh/config).Hash -eq (Get-FileHash config/ssh/config).Hash)
+        GetScript: |
+          Get-Content "${env:USERPROFILE}/.ssh/config"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade BasicService
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade BasicService
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-basicservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade Common
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Common
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-common.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Compliance-Helper
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Compliance-Helper
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-compliance-helper.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade CustomerAdmin
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Customer Admin
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-customeradmin.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade Docker
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Docker
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-docker.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade Documenation
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Documenation
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-documentation.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade Content Logging
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Content Log
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-contentlogging.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade Checkstyle
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Checkstyle
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-checkstyle.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+    
+    - resource: GitDsc/GitClone
+      id: SoapFacade WSDL Expander
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade WSDL Expander
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-wsdl-expand-maven-plugin.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade VehicleRequest
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade VehicleRequest
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-vehiclerequest.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade VehicleMgmtMessaging
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade VehicleMgmtMessaging
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-vehiclemgmtmessaging.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Updateservice
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Updateservice
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-updateservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade TripRecord
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade TripRecord
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-triprecord.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade TimeMgmtService
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade TimeMgmtService
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-timemgmtservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade SOAPUI
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade SOAP UI
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-soapui.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade ServicesService
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade ServicesService
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-servicesservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Resources
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Resources
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-resources.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Positions
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Positions
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-positions.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Pom
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Pom
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-pom.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade PA
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Performance Analysis
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-pa.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Mocks
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Mocks
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-mocks.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade k8sInfra
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade k8sInfra
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-k8sInfra.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Helm-Chart
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Helm-Chart
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-helm-chart.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Handbook
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Handbook
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-handbook.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Grafana
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Grafana
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-grafana.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade DrivingTimes
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade DrivingTimes
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-drivingtimes.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Downloadservice
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Downloadservice
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-downloadservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Actions
+      dependsOn:
+        - GitConfig
+        - SSHConfig
+      directives:
+        description: Clone SoapFacade Actions
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-actions.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
