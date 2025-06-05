@@ -1,0 +1,152 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Firefox
+      settings:
+        id: Mozilla.Firefox.de
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Obsidian
+      settings:
+        id: Obsidian.Obsidian
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: NextCloud
+      settings:
+        id: Nextcloud.NextcloudDesktop
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Teams
+      settings:
+        id: Microsoft.Teams
+        source: winget	
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ditto
+      settings:
+        id: Ditto.Ditto
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Auto Dark Mode
+      settings:
+        id: Armin2208.WindowsAutoNightMode
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Everything
+      settings:
+        id: voidtools.Everything
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: DOpus
+      settings:
+        id: GPSoftware.DirectoryOpus
+        source: winget
+      dependsOn:
+        - Everything
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Powertoys
+      settings:
+        id: Microsoft.PowerToys
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Topgrade
+      settings:
+        id: topgrade-rs.topgrade
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Neovim
+      settings:
+        id: Neovim.Neovim
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Neovide
+      settings:
+        id: Neovide.Neovide
+        source: winget
+      dependsOn:
+        - Neovim
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Ferdium
+      settings:
+        id: Ferdium.Ferdium
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Spotify
+      settings:
+        id: Spotify.Spotify
+        source: winget
+
+    - resource: PSDscResources/Registry
+      dependsOn: 
+        - Ditto
+      settings:
+        Key: 'HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced'
+        Ensure: Present
+        ValueName: 'DisabledHotKeys'
+        ValueType: String
+        ValueData: 'V'
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: IntelliJ
+      settings:
+        id: JetBrains.IntelliJIDEA.Community
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: GPG
+      settings:
+        id: GnuPG.Gpg4win
+        source: winget
+
+    - resource: Script
+      id: NeovimDataFolder
+      dependsOn:
+        - Neovim
+      settings:
+        SetScript: |
+          New-Item -Path $env:LOCALAPPDATA\nvim -Type Directory
+        TestScript: |
+          Test-Path $env:LOCALAPPDATA\nvim
+        GetScript: |
+          Get-Content $env:LOCALAPPDATA\nvim
+
+
+    - resource: Script
+      id: LazyVim
+      dependesOn:
+        - Neovim
+        - NeovimDataFolder
+        - Git
+      settings:
+        SetScript: |
+          git clone https://github.com/LazyVim/starter.git "$env:LOCALAPPDATA/nvim/"
+          Remove-Item $env:LOCALAPPDATA/nvim/.git -Recurse -Force
+        TestScript: |
+          Test-Path $env:LOCALAPPDATA\nvim\.neoconf.json
+        GetScript: |
+          Get-Path $env:LOCALAPPDATA
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Zig
+      dependesOn:
+        - Neovim
+      settings:
+        id: zig.zig
+        source: winget

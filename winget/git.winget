@@ -1,0 +1,30 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Git
+      settings:
+        id: Git.Git
+        source: winget
+
+    - resource: Script
+      id: GitConfig
+      settings:
+        SetScript: | 
+          Copy-Item -Path config/git/.gitconfig -Destination $env:USERPROFILE/.gitconfig
+        TestScript: |
+          (Test-Path "$env:USERPROFILE/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)
+        GetScript: |
+          Get-Content "$env:USERPROFILE/.gitconfig"
+
+    - resource: GitDsc/GitClone
+      directives:
+        description: Clone SoapFacade BasicService
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-basicservice.git
+        RootDirectory: "${WingetConfigRoot}/Documents/Projects/Fleetboard/Entwicklung/soapfacade/"

@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: SonicWall NetExtender
+      settings:
+        id: SonicWall.NetExtender
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WireGuard
+      settings:
+        id: WireGuard.WireGuard
+        source: winget
+

@@ -57,7 +57,7 @@ properties:
           Add-Content -Path $path -Value "Invoke-Expression -Command `$(starship completions power-shell | Out-String)"
         TestScript: |
           $path = "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-          ($(Get-Content -Path $path) -contains "Invoke-Expression (&starship init powershell)")
+          (Test-Path $path) -and ($(Get-Content -Path $path) -contains "Invoke-Expression (&starship init powershell)")
         GetScript: |
           starship
 
@@ -67,11 +67,15 @@ properties:
         - Starship
       settings:
         SetScript: |
+          $path = "$env:USERPROFILE\.config\"
+          if (-not (Test-Path $path)) {
+            New-Item -Path $path -ItemType Directory -Force
+          }
           $path = "$env:USERPROFILE\.config\starship.toml"
           Copy-Item -Path ".\config\starship\starship.toml" -Destination $path
         TestScript: |
           $path = "$env:USERPROFILE\.config\starship.toml"
-          ($(Get-FileHash -Path $path).Hash -eq $(Get-FileHash ".\config\starship\starship.toml").Hash)
+          (Test-Path $path) -and ($(Get-FileHash -Path $path).Hash -eq $(Get-FileHash ".\config\starship\starship.toml").Hash)
         GetScript: |
           starship
 
@@ -88,7 +92,7 @@ properties:
           Add-Content -Path $path -Value "Invoke-Expression (&zoxide init powershell --cmd cd | Out-String)"
         TestScript: |
           $path = "$env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1"
-          ($(Get-Content -Path $path) -contains "Invoke-Expression (&zoxide init powershell --cmd cd)")
+          (Test-Path $path) -and ($(Get-Content -Path $path) -contains "Invoke-Expression (&zoxide init powershell --cmd cd)")
         GetScript: |
           zoxide
 
