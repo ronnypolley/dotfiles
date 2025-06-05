@@ -21,7 +21,20 @@ properties:
         GetScript: |
           Get-Content "$env:USERPROFILE/.gitconfig"
 
+    - resource: Script
+      id: SSHConfig
+      settings:
+        SetScript: | 
+          Copy-Item -Path config/ssh/config -Destination $env:USERPROFILE/.ssh/config
+        TestScript: |
+          (Test-Path "$env:USERPROFILE/.ssh/config") -and ((Get-FileHash $env:USERPROFILE/.ssh/config).Hash -eq (Get-FileHash config/ssh/config).Hash)
+        GetScript: |
+          Get-Content "$env:USERPROFILE/.ssh/config"
+
     - resource: GitDsc/GitClone
+      dependsOn:
+        - GitConfig
+        - SSHConfig
       directives:
         description: Clone SoapFacade BasicService
         allowPrerelease: true

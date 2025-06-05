@@ -21,6 +21,6 @@
 [gpg "ssh"]
 	allowedSignersFile = ~/.ssh/.git_allowed_signers
 [gpg]
-	program = C:\\Program Files\\GnuPG\\bin\\gpg.exe
+	program = C:\\Program Files (x86)\\GnuPG\\bin\\gpg.exe
 [rerere]
 	enabled = true

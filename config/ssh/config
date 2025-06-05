@@ -1,0 +1,20 @@
+Host private.github.com
+	User git
+	Hostname github.com
+	PreferredAuthentications publickey
+	Port 22
+	IdentityFile ~/.ssh/github_new
+
+Host github.com
+	User git
+	Hostname github.com
+	PreferredAuthentications publickey
+	Port 22
+	IdentityFile ~/.ssh/id_ed25519_tbdir_github
+
+Host h1924242.stratoserver.net
+	User root
+	Hostname h1924242.stratoserver.net
+	PreferredAuthentications publickey
+	IdentityFile ~/.ssh/id_ed25519_strato_h1924242
+
