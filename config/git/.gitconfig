@@ -1,9 +1,8 @@
 # This is Git's per-user configuration file.
-[user]
-# Please adapt and uncomment the following lines:
-	name = Ronny Polley
-	email = it.polley@external.daimlertruck.com
-	signingkey = CDC1333421BE5EDB
+[includeIf "gitdir:Fleetboard/**"] 
+  path = ~/.config/git/gitconfig-fb
+[includeIf "gitdir:Own/**"] 
+  path = ~/.config/git/gitconfig-own
 [core]
 	longpaths = true
 [commit]

@@ -16,8 +16,15 @@ properties:
       settings:
         SetScript: | 
           Copy-Item -Path config/git/.gitconfig -Destination $env:USERPROFILE/.gitconfig
+          if(-not (Test-Path $env:USERPROFILE/.config/git)) {
+            New-Item -Path $env:USERPROFILE/.config/git -Type Directory
+          }
+          Copy-Item -Path config/git/gitconfig-* -Destination $env:USERPROFILE/.config/git/
         TestScript: |
-          (Test-Path "$env:USERPROFILE/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)
+          ((Test-Path "$env:USERPROFILE/.gitconfig") -and ((Get-FileHash $env:USERPROFILE/.gitconfig).Hash -eq (Get-FileHash config/git/.gitconfig).Hash)) -and
+          (Test-Path "$env:USERPROFILE/.config/git") -and 
+          ((Get-FileHash $env:USERPROFILE/.config/git/gitconfig-fb).Hash -eq (Get-FileHash config/git/.config/gitconfig-fb).Hash) -and
+          ((Get-FileHash $env:USERPROFILE/.config/git/gitconfig-own).Hash -eq (Get-FileHash config/git/.config/gitconfig-own).Hash)
         GetScript: |
           Get-Content "$env:USERPROFILE/.gitconfig"
 
