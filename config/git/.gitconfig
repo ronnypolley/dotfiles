@@ -5,6 +5,7 @@
   path = ~/.config/git/gitconfig-own
 [core]
 	longpaths = true
+  sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
 [commit]
 	gpgsign = true
 [tag]
