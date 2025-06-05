@@ -150,3 +150,9 @@ properties:
       settings:
         id: zig.zig
         source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Node
+      settings:
+        id: OpenJS.NodeJS
+        source: winget
