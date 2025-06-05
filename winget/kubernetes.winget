@@ -1,0 +1,54 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: WSL
+      settings:
+        id: Microsoft.WSL
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Kubectl
+      settings:
+        id: Kubernetes.kubectl
+        source: winget
+      dependsOn:
+        - Minikube
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Podman
+      settings:
+        id: RedHat.Podman
+        source: winget
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: PodManDesktop
+      settings:
+        id: RedHat.Podman-Desktop
+        source: winget
+      dependsOn:
+        - Podman
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Minikube
+      settings:
+        id: Kubernetes.minikube
+        source: winget
+      dependsOn:
+        - Podman
+
+    - resource: Microsoft.WinGet.DSC/WinGetPackage
+      id: Helm
+      settings:
+        id: Helm.Helm
+        source: winget
+      dependsOn:
+        - Podman
+        - Kubectl
+
+#Invoke-Expression -Command $(gh completion -s powershell | Out-String)
+# vim: set filetype=yaml
