@@ -1,0 +1,26 @@
+# This is Git's per-user configuration file.
+[user]
+# Please adapt and uncomment the following lines:
+	name = Ronny Polley
+	email = it.polley@external.daimlertruck.com
+	signingkey = CDC1333421BE5EDB
+[core]
+	longpaths = true
+[commit]
+	gpgsign = true
+[tag]
+	forceSignAnnotated = false
+[gui]
+	recentrepo = C:/Users/rpolley/Documents/Projekte/Fleetboard/Entwicklung/rcp
+[remote "origin"]
+	prune = true
+[fetch]
+	prune = true
+[credential "https://bitbucket.itsonix.eu"]
+	provider = bitbucket
+[gpg "ssh"]
+	allowedSignersFile = ~/.ssh/.git_allowed_signers
+[gpg]
+	program = C:\\Program Files\\GnuPG\\bin\\gpg.exe
+[rerere]
+	enabled = true
