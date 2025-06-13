@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Script
+      id: SecurityToolsFolder
+      settings:
+        SetScript: |
+          New-Item -Path C:\Tools\Security -Type Directory
+        TestScript: |
+          Test-Path C:\Tools\Security
+        GetScript: |
+          Get-ChildItem C:\Tools\Security
+
+    - resource: Script
+      id: SecurityToolsFolderEnv
+      dependsOn:
+        - SecurityToolsFolder
+      settings:
+        SetScript: |
+          [Environment]::SetEnvironmentVariable("SECURITY_TOOLS", 'C:\Tools\Security', "User")
+        TestScript: |
+          $env:SECURITY_TOOLS -eq 'C:\Tools\Security'
+        GetScript: |
+          $env:SECURITY_TOOLS
+          
+    # Opengrep
+    - resource: Script
+      id: OpenGrepFolder
+      dependsOn:
+        - SecurityToolsFolderEnv
+      settings:
+        SetScript: |
+          New-Item -Path $env:SECURITY_TOOLS\opengrep -Type Directory
+        TestScript: |
+          Test-Path $env:SECURITY_TOOLS\opengrep
+        GetScript: |
+          Get-ChildItem $env:SECURITY_TOOLS\opengrep
+
+    - resource: Script
+      id: OpenGrepPathEnv
+      dependsOn:
+        - OpenGrepFolder
+      settings:
+        SetScript: |
+          $newPath = $env:Path + ";$env:SECURITY_TOOLS\opengrep"
+          [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+        TestScript: |
+          $env:Path -match "opengrep"
+        GetScript: |
+          $env:Path
+
+    - resource: Script
+      id: OpenGrep-Download
+      dependsOn:
+        - OpenGrepPathEnv
+      settings:
+        SetScript: |
+          Invoke-WebRequest (Invoke-WebRequest https://api.github.com/repos/opengrep/opengrep/releases/latest | ConvertFrom-Json | select -ExpandProperty assets | where name -eq 'opengrep_windows_x86.exe').browser_download_url -OutFile $env:SECURITY_TOOLS\opengrep\opengrep.exe
+        TestScript: |
+          (Test-Path $env:SECURITY_TOOLS\opengrep\opengrep.exe) -and
+          (Invoke-WebRequest https://api.github.com/repos/opengrep/opengrep/releases/latest | ConvertFrom-Json).tag_name -match (opengrep --version)
+        GetScript: |
+          opengrep --version
+
+    # snyk
+    - resource: Script
+      id: SnykFolder
+      dependsOn:
+        - SecurityToolsFolderEnv
+      settings:
+        SetScript: |
+          New-Item -Path $env:SECURITY_TOOLS\snyk -Type Directory
+        TestScript: |
+          Test-Path $env:SECURITY_TOOLS\snyk
+        GetScript: |
+          Get-ChildItem $env:SECURITY_TOOLS\snyk
+
+    - resource: Script
+      id: SnykPathEnv
+      dependsOn:
+        - SnykFolder
+      settings:
+        SetScript: |
+          $newPath = $env:Path + ";$env:SECURITY_TOOLS\snyk"
+          [Environment]::SetEnvironmentVariable("Path", $newPath, "User")
+        TestScript: |
+          $env:Path -match "snyk"
+        GetScript: |
+          $env:Path
+
+    - resource: Script
+      id: Snyk-Download
+      dependsOn:
+        - SnykPathEnv
+      settings:
+        SetScript: |
+          Invoke-WebRequest (Invoke-WebRequest https://api.github.com/repos/snyk/cli/releases/latest | ConvertFrom-Json | select -ExpandProperty assets | where name -eq 'snyk-win.exe').browser_download_url -OutFile $env:SECURITY_TOOLS\snyk\snyk.exe
+        TestScript: |
+          (Test-Path $env:SECURITY_TOOLS\snyk\snyk.exe) -and
+          (Invoke-WebRequest https://api.github.com/repos/snyk/cli/releases/latest | ConvertFrom-Json).tag_name -match (snyk --version)
+        GetScript: |
+          snyk --version
+
+    - resource: Script
+      id: SnykAPIEnv
+      dependsOn:
+        - SnykPathEnv
+      settings:
+        SetScript: |
+          [Environment]::SetEnvironmentVariable("SNYK_API", "https://app.eu.snyk.io", "User")
+        TestScript: |
+          $env:SNYK_API -match "snyk.io"
+        GetScript: |
+          $env:SNYK_API
+
