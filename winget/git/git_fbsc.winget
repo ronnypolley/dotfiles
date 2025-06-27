@@ -1,0 +1,407 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: GitDsc/GitClone
+      id: Common
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Common.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component Auth
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-auth.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component Companycard Service
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-companycardservice.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component Driver Administration
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-driveradministration.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component FB Store
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-fbstore.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component Fleet Adm
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-fleetadm.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component MBUptime
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-mbuptime.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+    
+    - resource: GitDsc/GitClone
+      id: Component messagemonitoring
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-messagemonitoring
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component omniplusuptime
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-omniplusuptime
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component performanceanalysis
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-performanceanalysis
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component poiadministration
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-poiadministration
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component positionmgmt
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-positionmgmt
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component productmessagerouter
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-productmessagerouter
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component remotefms
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-remotefms
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component saaadministration
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-saaadministration
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component service
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-service
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component tachomanagement
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-tachomanagement
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component timemanagement
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-timemanagement
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component trailer
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-trailer
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component updateservice
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-updateservice
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component useradm
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-useradm
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component vehicleadm
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-vehicleadm
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Component vehicleinitialization
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/component-vehicleinitialization
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc"
+
+    - resource: GitDsc/GitClone
+      id: Datasources
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Datasources
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: DD Adapter
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/DD Adapter
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-daejb-spec
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-daejb-spec
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-datasources-spec
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-datasources-spec
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-fb-xslt
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-fb-xslt
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-sharedupdateservice
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-sharedupdateservice
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-tcejb-spec
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-tcejb-spec
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-tmsoap2-spec
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-tmsoap2-spec
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: external-tpz-protobuf-proto
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/external-tpz-protobuf-proto
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: fb
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/fb
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: fbprotocol
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/fbprotocol
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: fbsc
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/fbsc
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: fbsc-legacy
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/fbsc-legacy
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Generated-Data
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Generated-Data
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: GPRSAdapter
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/GPRSAdapter
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: jaxme
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/jaxme
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Maven Plugins
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Maven Plugins
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: release-pipeline
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/release-pipeline
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Resources
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Resources
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: rmfleet
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/rmfleet
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Server Parent
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Server Parent
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Shared
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Shared
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: test-fbsc
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/test-fbsc
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: Test-Release
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Test-Release
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: test-submodule
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/test-submodule
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: tools
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/tools
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+
+    - resource: GitDsc/GitClone
+      id: wsdl
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/wsdl
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
+

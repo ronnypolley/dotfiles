@@ -1,0 +1,95 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: GitDsc/GitClone
+      id: Admin3G DAC
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/admin3gdac.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: CSVExporter
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/csvexporter.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: Development Docker
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/developmentdocker.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: Device Protobuf Simulator
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/deviceprotobufsimulator.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: DHL Importer
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/dhlimporter.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: Disposition
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/disposition.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: dotfiles
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/dotfiles.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: Edeka
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/edeka.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: FBAppBase
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/fbappbase.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: FBComa
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/fbcoma.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
+    - resource: GitDsc/GitClone
+      id: FBConnectABInRev
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/blue/FBConnectABInRev.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\blue"
+    
