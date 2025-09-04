@@ -354,7 +354,7 @@ properties:
       directives:
         allowPrerelease: true
       settings:
-        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/Server Parent
+        HttpsUrl: ssh://git@git.fleetboard.net:7999/FBSC/server-parent
         RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\classic\\fbsc" 
 
     - resource: GitDsc/GitClone
