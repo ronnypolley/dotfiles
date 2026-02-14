@@ -1,0 +1,56 @@
+# yaml-language-server: $schema=https://aka.ms/configuration-dsc-schema/0.2
+
+# https://learn.microsoft.com/en-us/windows/package-manager/configuration/create#file-format
+
+properties:
+  configurationVersion: 0.2.0
+  resources:
+    - resource: Script
+      id: Own Git Clone Directory
+      settings:
+        SetScript: |
+          New-Item -Path ~\Documents\Projekte\Own\ -Type Directory
+        TestScript: |
+          Test-Path ~\Documents\Projekte\Own\
+        GetScript: |
+          Get-ChildItem ~\Documents\Projekte\Own\
+  
+    - resource: GitDsc/GitClone
+      id: EclipseIgnoreHelper
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@private.github.com:ronnypolley/ecliseignorehelper.git
+        RootDirectory: "~\\Documents\\Projekte\\Own"
+
+    - resource: GitDsc/GitClone
+      id: AdventOfCode
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@private.github.com:ronnypolley/adventofcode.git
+        RootDirectory: "~\\Documents\\Projekte\\Own"
+
+    - resource: GitDsc/GitClone
+      id: pitest-report-action
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@private.github.com:ronnypolley/pitest-report-action.git
+        RootDirectory: "~\\Documents\\Projekte\\Own"
+
+    - resource: GitDsc/GitClone
+      id: posh-sdkman
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@private.github.com:ronnypolley/posh-sdkman.git
+        RootDirectory: "~\\Documents\\Projekte\\Own"
+
+    - resource: GitDsc/GitClone
+      id: ronnypolley
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@private.github.com:ronnypolley/ronnypolley.git
+        RootDirectory: "~\\Documents\\Projekte\\Own"
