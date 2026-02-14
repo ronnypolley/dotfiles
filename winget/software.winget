@@ -38,7 +38,7 @@ properties:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: Auto Dark Mode
       settings:
-        id: Armin2208.WindowsAutoNightMode
+        id: ArminOsaj.AutoDarkMode
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
@@ -106,7 +106,7 @@ properties:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: IntelliJ
       settings:
-        id: JetBrains.IntelliJIDEA.Community
+        id: JetBrains.IntelliJIDEA.Ultimate
         source: winget
 
     - resource: Microsoft.WinGet.DSC/WinGetPackage
