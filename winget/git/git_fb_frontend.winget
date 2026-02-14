@@ -5,6 +5,16 @@
 properties:
   configurationVersion: 0.2.0
   resources:
+    - resource: Script
+      id: Kosmos Development Folder
+      settings:
+        SetScript: |
+          New-Item -Path ~\Documents\Projekte\Fleetboard\Entwicklung\kosmos -Type Directory
+        TestScript: |
+          Test-Path ~\Documents\Projekte\Fleetboard\Entwicklung\kosmos
+        GetScript: |
+          Get-ChildItem ~\Documents\Projekte\Fleetboard\Entwicklung\kosmos
+  
     - resource: GitDsc/GitClone
       id: Fleetboard Frontend
       directives:

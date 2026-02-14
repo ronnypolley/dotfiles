@@ -5,6 +5,16 @@
 properties:
   configurationVersion: 0.2.0
   resources:
+    - resource: Script
+      id: Blue Development Folder
+      settings:
+        SetScript: |
+          New-Item -Path ~\Documents\Projekte\Fleetboard\Entwicklung\classic\blue -Type Directory
+        TestScript: |
+          Test-Path ~\Documents\Projekte\Fleetboard\Entwicklung\classic\blue
+        GetScript: |
+          Get-ChildItem ~\Documents\Projekte\Fleetboard\Entwicklung\classic\blue
+
     - resource: GitDsc/GitClone
       id: Admin3G DAC
       directives:

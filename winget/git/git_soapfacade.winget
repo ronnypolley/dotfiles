@@ -5,6 +5,16 @@
 properties:
   configurationVersion: 0.2.0
   resources:
+    - resource: Script
+      id: SOAP Facade Development Folder
+      settings:
+        SetScript: |
+          New-Item -Path ~\Documents\Projekte\Fleetboard\Entwicklung\soapfacade -Type Directory
+        TestScript: |
+          Test-Path ~\Documents\Projekte\Fleetboard\Entwicklung\soapfacade
+        GetScript: |
+          Get-ChildItem ~\Documents\Projekte\Fleetboard\Entwicklung\soapfacade
+
     - resource: GitDsc/GitClone
       id: SoapFacade BasicService
       directives:
@@ -237,3 +247,34 @@ properties:
         HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-notification-backend.git
         RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
 
+    - resource: GitDsc/GitClone
+      id: SoapFacade WSDL
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-wsdl.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Chargemanagement
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-chargemanagement.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade Connectors
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-connectors.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
+
+    - resource: GitDsc/GitClone
+      id: SoapFacade TourEventsProcessor
+      directives:
+        allowPrerelease: true
+      settings:
+        HttpsUrl: git@github.com:DT-CSG-Fleetboard/soapfacade-toureventsprocessor.git
+        RootDirectory: "~\\Documents\\Projekte\\Fleetboard\\Entwicklung\\soapfacade"
